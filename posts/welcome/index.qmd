@@ -95,9 +95,9 @@ $F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 # Python example
 
 You might overwhelmed by the calculations of each performance metric, especially when the number of observations in the dataset is large. Fortunately, we have packages and functions that help us handle all the calculations.
+
 ```{python}
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
-
 # Example predictions
 y_true = ['spam', 'ham', 'spam', 'ham', 'spam', 'ham', 'ham']
 y_pred = ['spam', 'ham', 'ham', 'ham', 'spam', 'spam', 'spam']
@@ -110,7 +110,6 @@ accuracy = accuracy_score(y_true, y_pred)
 precision = precision_score(y_true, y_pred)
 recall = recall_score(y_true, y_pred)
 f1 = f1_score(y_true, y_pred)
-
 ```
 
 # Conclusion
