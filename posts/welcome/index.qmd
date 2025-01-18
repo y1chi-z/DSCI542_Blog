@@ -1,14 +1,83 @@
 ---
-title: "Welcome To My Blog"
-author: "Tristan O'Malley"
-date: "2025-01-14"
-categories: [news]
+title: "Explaining the Confusion Matrix for Beginners"
+subtitle: "Exploring, analyzing, and visualizing the confusion matrix to measure model performance with practical examples"
+author: "Yichi Zhang"
+date: "2025-01-18"
+categories: [Explanations]
 ---
 
-This is the first post in a Quarto blog. Welcome!
+# Introduction
 
-![](thumbnail.jpg)
+In the world of machine learning, classification is a wildly used supervised learning method, which recognize patterns and make predictions about which category a new piece of data belongs to. Classifiction models are used in a variety of scenarios, such as predicting if an email is spam, determining if a customer is likely to churn, or diagnosing a disease based on medical images. However, just because a model provides an answer doesn’t mean it’s the right one. The model can make mistakes when making predictions, and some mistakes are more harmful than others. For example, if the model is used to detect tumors from scans. If the model misclassified a malignant tumor as a benign one, the patient might not reciving proper treatment in time and cause some serious consequences. To truly evaluate a model’s performance, we need more than just its accuracy score. This is where the confusion matrix comes in.
 
-Since this post doesn't specify an explicit `image`, the first image in the post will be used in the listing page of posts.
+In this blog post, we’ll explain the confusion matrix, how it works, how to interpret the key metrics derived from it, and how to apply it in Python to evaluate your own classification models.
 
-Explaining the Confusion Matrix for Beginners
+# What is a Confusion Matrix
+
+A confusion matrix is a table used to describe the performance of a classification model. It compares the actual values (true labels) against the predicted values, helping us understand where the model is making correct predictions and where it is making mistakes.
+
+![](confusion_matrix.png) need captain and reference
+
+Figure 1 is a generalized confusion matrix for a binary classification model. There are only two labels in the target variable: positive and negative. The positive class is defined according to the problem, it is the label that we are interested in spotting. For example, if the model is used to detect spam emails, a spam email is considered as positive class while a ham email is considered as negative class. Here are some definitions of the terms in Figure 1.
+
+True Positive (TP): The model predicted the positive class as positive.
+False Positive (FP): The model predicted the negative class as positive (Type I error).
+True Negative (TN): The model predicted the negative class as negative.
+False Negative (FN): The model predicted the positive class as negative (Type II error).
+
+In the email classification example, a true positive means the model correctly identifies the spam email as spam. A false positive means the model marks an important email as spam. A true negative means the model identidies the ham email as ham. A false negative means the model is missing a spam email, and left it in your inbox.
+
+# Why is the Confusion Matrix useful
+
+The confusion matrix breaks predictions into four categories, which can help data scientists understand the model performance better by knowing which kind of error the model tends to make. We can calculate a range of performance metrics by using the number of cases in the above four categories (TP, FP, TN, FN) to address different aspects of model evaluation.
+
+## Accuracy
+Accuracy is the most comment used performance metric. It is the proportion of correct predictions (both positive and negative) made by the model out of the total number of predictions.
+
+|             | Predicted Spam | Predicted Ham |
+|-------------|----------------|---------------|
+| Actual Spam |      40        |       10      |
+| Actual Ham  |      5         |       45      |
+
+: Confusion Matrix for 100 emails {.striped .hover}
+
+$\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}}$
+
+$\text{Accuracy} = \frac{40 + 45}{40 + 45 + 5 + 10} = \frac{85}{100} = 0.85$
+
+The accuracy provides a simple and high-level view of model performance. The max value of accuracy is 1. Better model always has higher accuracy. However, accuracy could be a misleading metrix. Imagine you are training the email classification model with an imbalanced dataset that contains 99 ham emails and only 1 spam emails, even the dummy model can reach an accuracy of 99% becuase it predicting every observation as ham. Although the accuracy is high, the dummy model does not have the ability to detect spam email. But don't worry, we have other metrcis to help working with imbalanced datasets.
+
+## Precision
+Precision is 
+
+While accuracy is often used as a quick measure of a model’s performance, it can be misleading, especially in cases of imbalanced datasets where one class is more prevalent than the other. For example, in medical diagnoses, predicting that every patient is healthy might lead to a high accuracy, but it would be a terrible model. This is where the confusion matrix provides more meaningful insights.
+
+
+
+
+
+Precision: The proportion of true positive predictions over all positive predictions (including false positives).
+
+$\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}$
+
+Precision tells us how many of the predicted positive cases are actually positive.
+
+Recall (Sensitivity): The proportion of true positive predictions over all actual positive cases.
+
+$\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}$
+
+Recall tells us how many of the actual positive cases we successfully identified.
+F1-Score: The harmonic mean of precision and recall, giving a balance between the two metrics.
+
+$F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$
+
+F1-Score is especially useful when dealing with imbalanced classes.
+
+
+
+# Let's work on an example
+
+# Conclusion
+
+# References
+
