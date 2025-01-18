@@ -97,19 +97,21 @@ $F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
 You might overwhelmed by the calculations of each performance metric, especially when the number of observations in the dataset is large. Fortunately, we have packages and functions that help us handle all the calculations.
 
 ```{python}
-from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score, precision_score, recall_score, f1_score
+
 # Example predictions
-y_true = ['spam', 'ham', 'spam', 'ham', 'spam', 'ham', 'ham']
-y_pred = ['spam', 'ham', 'ham', 'ham', 'spam', 'spam', 'spam']
+y_true = ['spam', 'ham', 'spam', 'ham', 'spam', 'ham', 'ham', 'spam', 'ham', 'spam']
+y_pred = ['spam', 'ham', 'ham', 'ham', 'spam', 'spam', 'spam', 'spam', 'ham', 'spam']
 
 # Confusion Matrix
 cm = confusion_matrix(y_true, y_pred)
 
 # Metrics
 accuracy = accuracy_score(y_true, y_pred)
-precision = precision_score(y_true, y_pred)
-recall = recall_score(y_true, y_pred)
-f1 = f1_score(y_true, y_pred)
+precision = precision_score(y_true, y_pred, pos_label="spam")
+recall = recall_score(y_true, y_pred, pos_label="spam")
+f1 = f1_score(y_true, y_pred, pos_label="spam")
+ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['spam', 'ham']).plot()
 ```
 
 # Conclusion
