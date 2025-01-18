@@ -41,37 +41,48 @@ Accuracy is the most comment used performance metric. It is the proportion of co
 
 : Confusion Matrix for 100 emails {.striped .hover}
 
-$\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}}$
-
-$\text{Accuracy} = \frac{40 + 45}{40 + 45 + 5 + 10} = \frac{85}{100} = 0.85$
+$\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}} = \frac{40 + 45}{40 + 45 + 5 + 10} = \frac{85}{100} = 0.85$
 
 The accuracy provides a simple and high-level view of model performance. The max value of accuracy is 1. Better model always has higher accuracy. However, accuracy could be a misleading metrix. Imagine you are training the email classification model with an imbalanced dataset that contains 99 ham emails and only 1 spam emails, even the dummy model can reach an accuracy of 99% becuase it predicting every observation as ham. Although the accuracy is high, the dummy model does not have the ability to detect spam email. But don't worry, we have other metrcis to help working with imbalanced datasets.
 
 ## Precision
-Precision is 
+Precision is the proportion of true positive predictions over all positive predictions. It measures how many of the positive predictions made by a classification model are actually correct.
 
-While accuracy is often used as a quick measure of a model’s performance, it can be misleading, especially in cases of imbalanced datasets where one class is more prevalent than the other. For example, in medical diagnoses, predicting that every patient is healthy might lead to a high accuracy, but it would be a terrible model. This is where the confusion matrix provides more meaningful insights.
+|             | Predicted Spam | Predicted Ham |
+|-------------|----------------|---------------|
+| Actual Spam |      40        |       10      |
+| Actual Ham  |      5         |       45      |
+
+: Confusion Matrix for 100 emails {.striped .hover}
+
+$\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}} = \frac{40}{40 + 5} = \frac{40}{45} = 0.89$
 
 
+## Recall
+Recall is the proportion of true positive predictions over all actual positive cases. It measures how many of the actual positive cases are successfully identified.
+
+|             | Predicted Spam | Predicted Ham |
+|-------------|----------------|---------------|
+| Actual Spam |      40        |       10      |
+| Actual Ham  |      5         |       45      |
+
+: Confusion Matrix for 100 emails {.striped .hover}
+
+$\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}} = \frac{40}{40 + 10} = \frac{40}{50} = 0.8$
+
+## F1-Score
+F-score measures Precision and Recall at the same time and gives a balance between the two metrics.
+
+|             | Predicted Spam | Predicted Ham |
+|-------------|----------------|---------------|
+| Actual Spam |      40        |       10      |
+| Actual Ham  |      5         |       45      |
+
+: Confusion Matrix for 100 emails {.striped .hover}
+
+$F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} =  2 \cdot \frac{0.89 \cdot 0.8}{0.89 + 0.8} = 0.84$
 
 
-
-Precision: The proportion of true positive predictions over all positive predictions (including false positives).
-
-$\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}$
-
-Precision tells us how many of the predicted positive cases are actually positive.
-
-Recall (Sensitivity): The proportion of true positive predictions over all actual positive cases.
-
-$\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}$
-
-Recall tells us how many of the actual positive cases we successfully identified.
-F1-Score: The harmonic mean of precision and recall, giving a balance between the two metrics.
-
-$F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$
-
-F1-Score is especially useful when dealing with imbalanced classes.
 
 
 
