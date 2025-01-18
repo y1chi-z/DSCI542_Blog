@@ -75,8 +75,11 @@ Recall is important in scenarios where false negatives are more harmful. As we m
 
 ## F1-Score
 You may notice from the previous sections that there's a trade off between precision and recall. That is correct! 
+
 - if the model has high precision and low recall, it indicates the model is predicting fewer positives to ensure they are correct This may miss some actual positives (high false negatives).
+
 - if the model has high recall and low precision, it implies the model is predicting many positives, catching most true positives, but also increases false positives.
+
 We want to have a performance metric that provides a more balanced view. F1-score measures precision and recall at the same time and provides a single value that represents the trade-off. A high F1-Score indicates the model has a good balance of precision and recall.
 
 |             | Predicted Spam | Predicted Ham |
