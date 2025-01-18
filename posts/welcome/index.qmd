@@ -1,6 +1,6 @@
 ---
 title: "Explaining the Confusion Matrix for Beginners"
-subtitle: "Exploring, analyzing, and visualizing the confusion matrix to measure model performance with practical examples"
+subtitle: "Exploring, analyzing, and visualizing the binary confusion matrix to measure model performance with practical examples"
 author: "Yichi Zhang"
 date: "2025-01-18"
 categories: [Explanations]
@@ -92,12 +92,32 @@ We want to have a performance metric that provides a more balanced view. F1-scor
 $F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} =  2 \cdot \frac{0.89 \cdot 0.8}{0.89 + 0.8} = 0.84$
 
 
+# Python example
 
+You might overwhelmed by the calculations of each performance metric, especially when the number of observations in the dataset is large. Fortunately, we have packages and functions that help us handle all the calculations.
+```{python}
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 
+# Example predictions
+y_true = ['spam', 'ham', 'spam', 'ham', 'spam', 'ham', 'ham']
+y_pred = ['spam', 'ham', 'ham', 'ham', 'spam', 'spam', 'spam']
 
-# Let's work on an example
+# Confusion Matrix
+cm = confusion_matrix(y_true, y_pred)
+
+# Metrics
+accuracy = accuracy_score(y_true, y_pred)
+precision = precision_score(y_true, y_pred)
+recall = recall_score(y_true, y_pred)
+f1 = f1_score(y_true, y_pred)
+```
 
 # Conclusion
+
+
+Now you have a solid understanding of the confusion matrix and some performance metrics, you can try applying these concepts to your own classification models. Don’t just focus on accuracy—take the time to dig deeper into precision, recall, and F1-score to ensure your model is performing at its best. Start by building a confusion matrix in Python using your own datasets and explore how these metrics help you understand your model’s true performance.
+
+In this blog, we only explored the confusion matrix using binary classification. Can we using confusion matrix to evaluate multiclass classification problem? The answer is yes! The structure of the matrix might be slight more complex, but the fundamental is the same as binary confusion matrix. 
 
 # References
 
