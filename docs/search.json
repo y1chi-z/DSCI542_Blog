@@ -25,7 +25,7 @@
     "href": "posts/welcome/index.html#precision",
     "title": "Explaining the Confusion Matrix for Beginners",
     "section": "Precision",
-    "text": "Precision\nPrecision is the proportion of true positive predictions over all positive predictions. It measures how many of the positive predictions made by a classification model are actually correct.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(\\text{Precision} = \\frac{\\text{TP}}{\\text{TP} + \\text{FP}} = \\frac{40}{40 + 5} = \\frac{40}{45} = 0.89\\)"
+    "text": "Precision\nPrecision is the proportion of true positive predictions over all positive predictions. It measures how many of the positive predictions made by a classification model are actually correct.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(\\text{Precision} = \\frac{\\text{TP}}{\\text{TP} + \\text{FP}} = \\frac{40}{40 + 5} = \\frac{40}{45} = 0.89\\)\nPrecision is important in scenarios where false positives are more costly or more harmful, such as the email classification model incorrectly classifies an important email as spam. The maximum value of precision is 1. Higher precision indicating fewer false positives. However, a high precision does not guarantee good model performance. In the email example, if the model predicts only one email as spam out of 100 spam emails and happens to be correct, the precision is 1 in this case, but the model fails to detect most spam emails."
   },
   {
     "objectID": "posts/welcome/index.html#recall",
@@ -39,7 +39,7 @@
     "href": "posts/welcome/index.html#f1-score",
     "title": "Explaining the Confusion Matrix for Beginners",
     "section": "F1-Score",
-    "text": "F1-Score\nF-score measures Precision and Recall at the same time and gives a balance between the two metrics.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(F1 = 2 \\cdot \\frac{\\text{Precision} \\cdot \\text{Recall}}{\\text{Precision} + \\text{Recall}} =  2 \\cdot \\frac{0.89 \\cdot 0.8}{0.89 + 0.8} = 0.84\\)"
+    "text": "F1-Score\nF-score measures Precision and Recall at the same time and gives a balance between the two metrics.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(F1 = 2 \\cdot \\frac{\\text{Precision} \\cdot \\text{Recall}}{\\text{Precision} + \\text{Recall}} =  2 \\cdot \\frac{0.89 \\cdot 0.8}{0.89 + 0.8} = 0.84\\)\n•   High Precision, Low Recall: The model is conservative, predicting fewer positives to ensure they are correct. This may miss some actual positives (high false negatives).\n•   High Recall, Low Precision: The model predicts many positives, catching most true positives, but also increases false positives."
   },
   {
     "objectID": "posts/post-with-code/index.html",
