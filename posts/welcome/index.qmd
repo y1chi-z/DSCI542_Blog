@@ -57,6 +57,7 @@ Precision is the proportion of true positive predictions over all positive predi
 
 $\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}} = \frac{40}{40 + 5} = \frac{40}{45} = 0.89$
 
+Precision is important in scenarios where false positives are more costly or more harmful, such as the email classification model incorrectly classifies an important email as spam. The maximum value of precision is 1. Higher precision indicating fewer false positives. However, a high precision does not guarantee good model performance. In the email example, if the model predicts only one email as spam out of 100 spam emails and happens to be correct, the precision is 1 in this case, but the model fails to detect most spam emails. 
 
 ## Recall
 Recall is the proportion of true positive predictions over all actual positive cases. It measures how many of the actual positive cases are successfully identified.
@@ -82,7 +83,8 @@ F-score measures Precision and Recall at the same time and gives a balance betwe
 
 $F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} =  2 \cdot \frac{0.89 \cdot 0.8}{0.89 + 0.8} = 0.84$
 
-
+	•	High Precision, Low Recall: The model is conservative, predicting fewer positives to ensure they are correct. This may miss some actual positives (high false negatives).
+	•	High Recall, Low Precision: The model predicts many positives, catching most true positives, but also increases false positives.
 
 
 
