@@ -5,6 +5,7 @@ author: "Yichi Zhang"
 date: "2025-01-18"
 categories: [Explanations]
 ---
+![](cover.png)[@unsplash_digital_code]
 
 # Introduction
 
@@ -16,14 +17,17 @@ In this blog post, we’ll explain the confusion matrix, how it works, how to in
 
 A confusion matrix is a table used to describe the performance of a classification model. It compares the actual values (true labels) against the predicted values, helping us understand where the model is making correct predictions and where it is making mistakes.
 
-![](confusion_matrix.png) need captain and reference
+![Confusion Matrix](confusion_matrix.png){#fig-conf-matrix}
 
-Figure 1 is a generalized confusion matrix for a binary classification model. There are only two labels in the target variable: positive and negative. The positive class is defined according to the problem, it is the label that we are interested in spotting. For example, if the model is used to detect spam emails, a spam email is considered as positive class while a ham email is considered as negative class. Here are some definitions of the terms in Figure 1.
+@fig-conf-matrix [@dsci573_classification_metrics] is a generalized confusion matrix for a binary classification model. There are only two labels in the target variable: positive and negative. The positive class is defined according to the problem, it is the label that we are interested in spotting. For example, if the model is used to detect spam emails, a spam email is considered as positive class while a ham email is considered as negative class. Here are some definitions of the terms in @fig-conf-matrix [@dsci573_classification_metrics].
 
-True Positive (TP): The model predicted the positive class as positive.
-False Positive (FP): The model predicted the negative class as positive (Type I error).
-True Negative (TN): The model predicted the negative class as negative.
-False Negative (FN): The model predicted the positive class as negative (Type II error).
+- True Positive (TP): The model predicted the positive class as positive.
+
+- False Positive (FP): The model predicted the negative class as positive (Type I error).
+
+- True Negative (TN): The model predicted the negative class as negative.
+
+- False Negative (FN): The model predicted the positive class as negative (Type II error).
 
 In the email classification example, a true positive means the model correctly identifies the spam email as spam. A false positive means the model marks an important email as spam. A true negative means the model identidies the ham email as ham. A false negative means the model is missing a spam email, and left it in your inbox.
 
@@ -80,7 +84,7 @@ You may notice from the previous sections that there's a trade off between preci
 
 - if the model has high recall and low precision, it implies the model is predicting many positives, catching most true positives, but also increases false positives.
 
-We want to have a performance metric that provides a more balanced view. F1-score measures precision and recall at the same time and provides a single value that represents the trade-off. A high F1-Score indicates the model has a good balance of precision and recall.
+We want to have a performance metric that provides a more balanced view. F1-score measures precision and recall at the same time and provides a single value that represents the trade-off. [@towardsdatascience_confusion_matrix] A high F1-Score indicates the model has a good balance of precision and recall.
 
 |             | Predicted Spam | Predicted Ham |
 |-------------|----------------|---------------|
@@ -91,10 +95,14 @@ We want to have a performance metric that provides a more balanced view. F1-scor
 
 $F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} =  2 \cdot \frac{0.89 \cdot 0.8}{0.89 + 0.8} = 0.84$
 
+Here is an full generalized confusion matirx with performance metrics [@dsci573_classification_metrics]:
+
+![Full Confusion Matrix](full_cm.png){#fig-full-cm}
+
 
 # Python example
 
-You might overwhelmed by the calculations of each performance metric, especially when the number of observations in the dataset is large. Fortunately, we have packages and functions that help us handle all the calculations.
+You might overwhelmed by the calculations of each performance metric, especially when the number of observations in the dataset is large. Fortunately, we have packages and functions that help us handle all the calculations. You can even generate a heat map version of confusion matrix using the disply function.
 
 ```{python}
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score, precision_score, recall_score, f1_score
@@ -116,10 +124,11 @@ ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['spam', 'ham']).plot
 
 # Conclusion
 
+Confusion matrix is a powerful tool that helps us understanding the model’s strengths and weaknesses, and highlighting which types of errors the model is prone to making. It also provides the foundation for calculating other performance metrics like accuracy, precision, recall, and F1-score. The key takeaway is that there's no such a metric that can provide a comprehensive view of the model’s performance. By analyzing all those metrics, you can ensure that your model works as intended and reduces harmful misclassification consequences.
 
-Now you have a solid understanding of the confusion matrix and some performance metrics, you can try applying these concepts to your own classification models. Don’t just focus on accuracy—take the time to dig deeper into precision, recall, and F1-score to ensure your model is performing at its best. Start by building a confusion matrix in Python using your own datasets and explore how these metrics help you understand your model’s true performance.
+Now you have a solid understanding of the confusion matrix and performance metrics, you can try applying these concepts to your own classification models. You can take the time to compare different performance metrics like precision, recall, and F1-score to ensure your model is performing at its best. 
 
 In this blog, we only explored the confusion matrix using binary classification. Can we using confusion matrix to evaluate multiclass classification problem? The answer is yes! The structure of the matrix might be slight more complex, but the fundamental is the same as binary confusion matrix. 
 
-# References
+
 

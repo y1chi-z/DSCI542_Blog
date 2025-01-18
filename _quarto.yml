@@ -16,5 +16,27 @@ format:
     theme: cosmo
     css: styles.css
 
+references:
+  - id: dsci573_classification_metrics
+    author: UBC MDS
+    title: Classification Metrics
+    year: 2024
+    url: https://pages.github.ubc.ca/mds-2024-25/DSCI_573_feat-model-select_students/lectures/01_classification-metrics.html#
+    note: "Accessed: 2024-01-17"
+
+  - id: towardsdatascience_confusion_matrix
+    author: Jason Brownlee
+    title: Understanding Confusion Matrix
+    year: 2019
+    url: https://towardsdatascience.com/understanding-confusion-matrix-a9ad42dcfd62
+    note: "Accessed: 2024-01-17"
+    
+  - id: unsplash_digital_code
+    author: Pexels
+    title: Digital Code Number Abstract Background Represent Coding Technology and Programming Languages
+    year: 2023
+    url: https://unsplash.com/photos/digital-code-number-abstract-background-represent-coding-technology-and-programming-languages-00IATt47-Lc
+    note: "Accessed: 2024-01-17"
+  
 
 

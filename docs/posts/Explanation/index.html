@@ -56,7 +56,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -179,7 +199,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Explaining the Confusion Matrix for Beginners</h1>
-            <p class="subtitle lead">Exploring, analyzing, and visualizing the confusion matrix to measure model performance with practical examples</p>
+            <p class="subtitle lead">Exploring, analyzing, and visualizing the binary confusion matrix to measure model performance with practical examples</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Explanations</div>
               </div>
@@ -218,6 +238,7 @@ window.Quarto = {
 
 
 
+<p><img src="cover.png" class="img-fluid"><span class="citation" data-cites="unsplash_digital_code">(<a href="#ref-unsplash_digital_code" role="doc-biblioref">Pexels, n.d.</a>)</span></p>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>In the world of machine learning, classification is a wildly used supervised learning method, which recognize patterns and make predictions about which category a new piece of data belongs to. Classifiction models are used in a variety of scenarios, such as predicting if an email is spam, determining if a customer is likely to churn, or diagnosing a disease based on medical images. However, just because a model provides an answer doesn’t mean it’s the right one. The model can make mistakes when making predictions, and some mistakes are more harmful than others. For example, if the model is used to detect tumors from scans. If the model misclassified a malignant tumor as a benign one, the patient might not reciving proper treatment in time and cause some serious consequences. To truly evaluate a model’s performance, we need more than just its accuracy score. This is where the confusion matrix comes in.</p>
@@ -226,9 +247,23 @@ window.Quarto = {
 <section id="what-is-a-confusion-matrix" class="level1">
 <h1>What is a Confusion Matrix</h1>
 <p>A confusion matrix is a table used to describe the performance of a classification model. It compares the actual values (true labels) against the predicted values, helping us understand where the model is making correct predictions and where it is making mistakes.</p>
-<p><img src="confusion_matrix.png" class="img-fluid"> need captain and reference</p>
-<p>Figure 1 is a generalized confusion matrix for a binary classification model. There are only two labels in the target variable: positive and negative. The positive class is defined according to the problem, it is the label that we are interested in spotting. For example, if the model is used to detect spam emails, a spam email is considered as positive class while a ham email is considered as negative class. Here are some definitions of the terms in Figure 1.</p>
-<p>True Positive (TP): The model predicted the positive class as positive. False Positive (FP): The model predicted the negative class as positive (Type I error). True Negative (TN): The model predicted the negative class as negative. False Negative (FN): The model predicted the positive class as negative (Type II error).</p>
+<div id="fig-conf-matrix" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-conf-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="confusion_matrix.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-conf-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Confusion Matrix
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-conf-matrix" class="quarto-xref">Figure&nbsp;1</a> is a generalized confusion matrix for a binary classification model. There are only two labels in the target variable: positive and negative. The positive class is defined according to the problem, it is the label that we are interested in spotting. For example, if the model is used to detect spam emails, a spam email is considered as positive class while a ham email is considered as negative class. Here are some definitions of the terms in <a href="#fig-conf-matrix" class="quarto-xref">Figure&nbsp;1</a>.</p>
+<ul>
+<li><p>True Positive (TP): The model predicted the positive class as positive.</p></li>
+<li><p>False Positive (FP): The model predicted the negative class as positive (Type I error).</p></li>
+<li><p>True Negative (TN): The model predicted the negative class as negative.</p></li>
+<li><p>False Negative (FN): The model predicted the positive class as negative (Type II error).</p></li>
+</ul>
 <p>In the email classification example, a true positive means the model correctly identifies the spam email as spam. A false positive means the model marks an important email as spam. A true negative means the model identidies the ham email as ham. A false negative means the model is missing a spam email, and left it in your inbox.</p>
 </section>
 <section id="why-is-the-confusion-matrix-useful" class="level1">
@@ -325,7 +360,7 @@ window.Quarto = {
 <li><p>if the model has high precision and low recall, it indicates the model is predicting fewer positives to ensure they are correct This may miss some actual positives (high false negatives).</p></li>
 <li><p>if the model has high recall and low precision, it implies the model is predicting many positives, catching most true positives, but also increases false positives.</p></li>
 </ul>
-<p>We want to have a performance metric that provides a more balanced view. F1-score measures precision and recall at the same time and provides a single value that represents the trade-off. A high F1-Score indicates the model has a good balance of precision and recall.</p>
+<p>We want to have a performance metric that provides a more balanced view. F1-score measures precision and recall at the same time and provides a single value that represents the trade-off. <span class="citation" data-cites="towardsdatascience_confusion_matrix">(<a href="#ref-towardsdatascience_confusion_matrix" role="doc-biblioref">Jason Brownlee, n.d.</a>)</span> A high F1-Score indicates the model has a good balance of precision and recall.</p>
 <table class="table-striped table-hover caption-top table">
 <caption>Confusion Matrix for 100 emails</caption>
 <thead>
@@ -349,39 +384,68 @@ window.Quarto = {
 </tbody>
 </table>
 <p><span class="math inline">\(F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} =  2 \cdot \frac{0.89 \cdot 0.8}{0.89 + 0.8} = 0.84\)</span></p>
+<p>Here is an full generalized confusion matirx with performance metrics <span class="citation" data-cites="dsci573_classification_metrics">(<a href="#ref-dsci573_classification_metrics" role="doc-biblioref">UBC MDS, n.d.</a>)</span>:</p>
+<div id="fig-full-cm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-full-cm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="full_cm.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-full-cm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Full Confusion Matrix
+</figcaption>
+</figure>
+</div>
 </section>
 </section>
 <section id="python-example" class="level1">
 <h1>Python example</h1>
-<p>You might overwhelmed by the calculations of each performance metric, especially when the number of observations in the dataset is large. Fortunately, we have packages and functions that help us handle all the calculations.</p>
-<div id="0a932b32" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, precision_score, recall_score, f1_score, accuracy_score</span>
+<p>You might overwhelmed by the calculations of each performance metric, especially when the number of observations in the dataset is large. Fortunately, we have packages and functions that help us handle all the calculations. You can even generate a heat map version of confusion matrix using the disply function.</p>
+<div id="c697b33f" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, ConfusionMatrixDisplay, accuracy_score, precision_score, recall_score, f1_score</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Example predictions</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> [<span class="st">'spam'</span>, <span class="st">'ham'</span>, <span class="st">'spam'</span>, <span class="st">'ham'</span>, <span class="st">'spam'</span>, <span class="st">'ham'</span>, <span class="st">'ham'</span>, <span class="st">'spam'</span>, <span class="st">'ham'</span>, <span class="st">'spam'</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> [<span class="st">'spam'</span>, <span class="st">'ham'</span>, <span class="st">'ham'</span>, <span class="st">'ham'</span>, <span class="st">'spam'</span>, <span class="st">'spam'</span>, <span class="st">'spam'</span>, <span class="st">'spam'</span>, <span class="st">'ham'</span>, <span class="st">'spam'</span>]</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Confusion Matrix</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> confusion_matrix(y_true, y_pred)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Metrics</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(y_true, y_pred)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>precision <span class="op">=</span> precision_score(y_true, y_pred)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>recall <span class="op">=</span> recall_score(y_true, y_pred)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> f1_score(y_true, y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>precision <span class="op">=</span> precision_score(y_true, y_pred, pos_label<span class="op">=</span><span class="st">"spam"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>recall <span class="op">=</span> recall_score(y_true, y_pred, pos_label<span class="op">=</span><span class="st">"spam"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> f1_score(y_true, y_pred, pos_label<span class="op">=</span><span class="st">"spam"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(confusion_matrix<span class="op">=</span>cm, display_labels<span class="op">=</span>[<span class="st">'spam'</span>, <span class="st">'ham'</span>]).plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-2-output-1.png" width="528" height="434" class="figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
-<p>Now you have a solid understanding of the confusion matrix and some performance metrics, you can try applying these concepts to your own classification models. Don’t just focus on accuracy—take the time to dig deeper into precision, recall, and F1-score to ensure your model is performing at its best. Start by building a confusion matrix in Python using your own datasets and explore how these metrics help you understand your model’s true performance.</p>
+<p>Confusion matrix is a powerful tool that helps us understanding the model’s strengths and weaknesses, and highlighting which types of errors the model is prone to making. It also provides the foundation for calculating other performance metrics like accuracy, precision, recall, and F1-score. The key takeaway is that there’s no such a metric that can provide a comprehensive view of the model’s performance. By analyzing all those metrics, you can ensure that your model works as intended and reduces harmful misclassification consequences.</p>
+<p>Now you have a solid understanding of the confusion matrix and performance metrics, you can try applying these concepts to your own classification models. You can take the time to compare different performance metrics like precision, recall, and F1-score to ensure your model is performing at its best.</p>
+<p>In this blog, we only explored the confusion matrix using binary classification. Can we using confusion matrix to evaluate multiclass classification problem? The answer is yes! The structure of the matrix might be slight more complex, but the fundamental is the same as binary confusion matrix.</p>
+
+
+
 </section>
-<section id="references" class="level1">
-<h1>References</h1>
 
-
-</section>
-
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-towardsdatascience_confusion_matrix" class="csl-entry" role="listitem">
+Jason Brownlee. n.d. <span>“Understanding Confusion Matrix.”</span> <a href="https://towardsdatascience.com/understanding-confusion-matrix-a9ad42dcfd62">https://towardsdatascience.com/understanding-confusion-matrix-a9ad42dcfd62</a>.
+</div>
+<div id="ref-unsplash_digital_code" class="csl-entry" role="listitem">
+Pexels. n.d. <span>“Digital Code Number Abstract Background Represent Coding Technology and Programming Languages.”</span> <a href="https://unsplash.com/photos/digital-code-number-abstract-background-represent-coding-technology-and-programming-languages-00IATt47-Lc">https://unsplash.com/photos/digital-code-number-abstract-background-represent-coding-technology-and-programming-languages-00IATt47-Lc</a>.
+</div>
+<div id="ref-dsci573_classification_metrics" class="csl-entry" role="listitem">
+UBC MDS. n.d. <span>“Classification Metrics.”</span> <a href="https://pages.github.ubc.ca/mds-2024-25/DSCI_573_feat-model-select_students/lectures/01_classification-metrics.html#">https://pages.github.ubc.ca/mds-2024-25/DSCI_573_feat-model-select_students/lectures/01_classification-metrics.html#</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

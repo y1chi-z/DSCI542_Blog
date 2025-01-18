@@ -7,52 +7,45 @@
     "text": "About this blog"
   },
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
+    "objectID": "posts/Explanation/index.html",
+    "href": "posts/Explanation/index.html",
     "title": "Explaining the Confusion Matrix for Beginners",
     "section": "",
-    "text": "In the world of machine learning, classification is a wildly used supervised learning method, which recognize patterns and make predictions about which category a new piece of data belongs to. Classifiction models are used in a variety of scenarios, such as predicting if an email is spam, determining if a customer is likely to churn, or diagnosing a disease based on medical images. However, just because a model provides an answer doesn’t mean it’s the right one. The model can make mistakes when making predictions, and some mistakes are more harmful than others. For example, if the model is used to detect tumors from scans. If the model misclassified a malignant tumor as a benign one, the patient might not reciving proper treatment in time and cause some serious consequences. To truly evaluate a model’s performance, we need more than just its accuracy score. This is where the confusion matrix comes in.\nIn this blog post, we’ll explain the confusion matrix, how it works, how to interpret the key metrics derived from it, and how to apply it in Python to evaluate your own classification models."
+    "text": "(Pexels, n.d.)"
   },
   {
-    "objectID": "posts/welcome/index.html#accuracy",
-    "href": "posts/welcome/index.html#accuracy",
+    "objectID": "posts/Explanation/index.html#accuracy",
+    "href": "posts/Explanation/index.html#accuracy",
     "title": "Explaining the Confusion Matrix for Beginners",
     "section": "Accuracy",
     "text": "Accuracy\nAccuracy is the most comment used performance metric. It is the proportion of correct predictions (both positive and negative) made by the model out of the total number of predictions.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(\\text{Accuracy} = \\frac{\\text{TP} + \\text{TN}}{\\text{TP} + \\text{TN} + \\text{FP} + \\text{FN}} = \\frac{40 + 45}{40 + 45 + 5 + 10} = \\frac{85}{100} = 0.85\\)\nThe accuracy provides a simple and high-level view of model performance. The max value of accuracy is 1. Better model always has higher accuracy. However, accuracy could be a misleading metrix. Imagine you are training the email classification model with an imbalanced dataset that contains 99 ham emails and only 1 spam emails, even the dummy model can reach an accuracy of 99% becuase it predicting every observation as ham. Although the accuracy is high, the dummy model does not have the ability to detect spam email. But don’t worry, we have other metrcis to help working with imbalanced datasets."
   },
   {
-    "objectID": "posts/welcome/index.html#precision",
-    "href": "posts/welcome/index.html#precision",
+    "objectID": "posts/Explanation/index.html#precision",
+    "href": "posts/Explanation/index.html#precision",
     "title": "Explaining the Confusion Matrix for Beginners",
     "section": "Precision",
     "text": "Precision\nPrecision is the proportion of true positive predictions over all positive predictions. It measures how many of the positive predictions made by a classification model are actually correct.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(\\text{Precision} = \\frac{\\text{TP}}{\\text{TP} + \\text{FP}} = \\frac{40}{40 + 5} = \\frac{40}{45} = 0.89\\)\nPrecision is important in scenarios where false positives are more costly, such as the email classification model incorrectly classifies an important email as spam. The maximum value of precision is 1. Higher precision indicating fewer false positives. However, a high precision does not guarantee good model performance. In the email example, if the model predicts only one email as spam out of 100 spam emails and happens to be correct, the precision is 1 in this case, but the model fails to detect most spam emails."
   },
   {
-    "objectID": "posts/welcome/index.html#recall",
-    "href": "posts/welcome/index.html#recall",
+    "objectID": "posts/Explanation/index.html#recall",
+    "href": "posts/Explanation/index.html#recall",
     "title": "Explaining the Confusion Matrix for Beginners",
     "section": "Recall",
     "text": "Recall\nRecall is the proportion of true positive predictions over all actual positive cases. It measures how many of the actual positive cases are successfully identified.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(\\text{Recall} = \\frac{\\text{TP}}{\\text{TP} + \\text{FN}} = \\frac{40}{40 + 10} = \\frac{40}{50} = 0.8\\)\nRecall is important in scenarios where false negatives are more harmful. As we mentioned in the introduction, if the model misclassified a malignant tumor as a benign one (in the tumor detection, malignant tumor is usually the positive class), it leads to a lack of treatment and reduces survival rates. The maximum value of recall is 1. A higher recall indicates fewer missed positives, but it does not necessarily indicates good model performance. In the email example, if the model predicts every email as spam, the recall will be 1 because no spam email is missing. The model would classify all ham emails incorrectly, and there would be nothing left in the inbox."
   },
   {
-    "objectID": "posts/welcome/index.html#f1-score",
-    "href": "posts/welcome/index.html#f1-score",
+    "objectID": "posts/Explanation/index.html#f1-score",
+    "href": "posts/Explanation/index.html#f1-score",
     "title": "Explaining the Confusion Matrix for Beginners",
     "section": "F1-Score",
-    "text": "F1-Score\nYou may notice from the previous sections that there’s a trade off between precision and recall. That is correct!\n\nif the model has high precision and low recall, it indicates the model is predicting fewer positives to ensure they are correct This may miss some actual positives (high false negatives).\nif the model has high recall and low precision, it implies the model is predicting many positives, catching most true positives, but also increases false positives.\n\nWe want to have a performance metric that provides a more balanced view. F1-score measures precision and recall at the same time and provides a single value that represents the trade-off. A high F1-Score indicates the model has a good balance of precision and recall.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(F1 = 2 \\cdot \\frac{\\text{Precision} \\cdot \\text{Recall}}{\\text{Precision} + \\text{Recall}} =  2 \\cdot \\frac{0.89 \\cdot 0.8}{0.89 + 0.8} = 0.84\\)"
-  },
-  {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code."
+    "text": "F1-Score\nYou may notice from the previous sections that there’s a trade off between precision and recall. That is correct!\n\nif the model has high precision and low recall, it indicates the model is predicting fewer positives to ensure they are correct This may miss some actual positives (high false negatives).\nif the model has high recall and low precision, it implies the model is predicting many positives, catching most true positives, but also increases false positives.\n\nWe want to have a performance metric that provides a more balanced view. F1-score measures precision and recall at the same time and provides a single value that represents the trade-off. (Jason Brownlee, n.d.) A high F1-Score indicates the model has a good balance of precision and recall.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(F1 = 2 \\cdot \\frac{\\text{Precision} \\cdot \\text{Recall}}{\\text{Precision} + \\text{Recall}} =  2 \\cdot \\frac{0.89 \\cdot 0.8}{0.89 + 0.8} = 0.84\\)\nHere is an full generalized confusion matirx with performance metrics (UBC MDS, n.d.):\n\n\n\n\n\n\nFigure 2: Full Confusion Matrix"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Blog",
     "section": "",
-    "text": "Explaining the Confusion Matrix for Beginners\n\n\nExploring, analyzing, and visualizing the binary confusion matrix to measure model performance with practical examples\n\n\n\nExplanations\n\n\n\n\n\n\n\n\n\nJan 18, 2025\n\n\nYichi Zhang\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 17, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\nNo matching items"
+    "text": "Explaining the Confusion Matrix for Beginners\n\n\nExploring, analyzing, and visualizing the binary confusion matrix to measure model performance with practical examples\n\n\n\nExplanations\n\n\n\n\n\n\n\n\n\nJan 18, 2025\n\n\nYichi Zhang\n\n\n\n\n\n\nNo matching items"
   }
 ]
