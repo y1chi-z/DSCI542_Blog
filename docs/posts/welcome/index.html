@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Tristan O’Malley">
-<meta name="dcterms.date" content="2025-01-14">
+<meta name="author" content="Yichi Zhang">
+<meta name="dcterms.date" content="2025-01-18">
 
-<title>Welcome To My Blog – Blog</title>
+<title>Explaining the Confusion Matrix for Beginners – Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -115,9 +144,10 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Welcome To My Blog</h1>
+      <h1 class="title">Explaining the Confusion Matrix for Beginners</h1>
+            <p class="subtitle lead">Exploring, analyzing, and visualizing the confusion matrix to measure model performance with practical examples</p>
                                 <div class="quarto-categories">
-                <div class="quarto-category">news</div>
+                <div class="quarto-category">Explanations</div>
               </div>
                   </div>
   </div>
@@ -128,14 +158,14 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Tristan O’Malley </p>
+               <p>Yichi Zhang </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 14, 2025</p>
+        <p class="date">January 18, 2025</p>
       </div>
     </div>
     
@@ -154,12 +184,76 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is the first post in a Quarto blog. Welcome!</p>
-<p><img src="thumbnail.jpg" class="img-fluid"></p>
-<p>Since this post doesn’t specify an explicit <code>image</code>, the first image in the post will be used in the listing page of posts.</p>
-<p>Explaining the Confusion Matrix for Beginners</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In the world of machine learning, classification is a wildly used supervised learning method, which recognize patterns and make predictions about which category a new piece of data belongs to. Classifiction models are used in a variety of scenarios, such as predicting if an email is spam, determining if a customer is likely to churn, or diagnosing a disease based on medical images. However, just because a model provides an answer doesn’t mean it’s the right one. The model can make mistakes when making predictions, and some mistakes are more harmful than others. For example, if the model is used to detect tumors from scans. If the model misclassified a malignant tumor as a benign one, the patient might not reciving proper treatment in time and cause some serious consequences. To truly evaluate a model’s performance, we need more than just its accuracy score. This is where the confusion matrix comes in.</p>
+<p>In this blog post, we’ll explain the confusion matrix, how it works, how to interpret the key metrics derived from it, and how to apply it in Python to evaluate your own classification models.</p>
+</section>
+<section id="what-is-a-confusion-matrix" class="level1">
+<h1>What is a Confusion Matrix</h1>
+<p>A confusion matrix is a table used to describe the performance of a classification model. It compares the actual values (true labels) against the predicted values, helping us understand where the model is making correct predictions and where it is making mistakes.</p>
+<p><img src="confusion_matrix.png" class="img-fluid"> need captain and reference</p>
+<p>Figure 1 is a generalized confusion matrix for a binary classification model. There are only two labels in the target variable: positive and negative. The positive class is defined according to the problem, it is the label that we are interested in spotting. For example, if the model is used to detect spam emails, a spam email is considered as positive class while a ham email is considered as negative class. Here are some definitions of the terms in Figure 1.</p>
+<p>True Positive (TP): The model predicted the positive class as positive. False Positive (FP): The model predicted the negative class as positive (Type I error). True Negative (TN): The model predicted the negative class as negative. False Negative (FN): The model predicted the positive class as negative (Type II error).</p>
+<p>In the email classification example, a true positive means the model correctly identifies the spam email as spam. A false positive means the model marks an important email as spam. A true negative means the model identidies the ham email as ham. A false negative means the model is missing a spam email, and left it in your inbox.</p>
+</section>
+<section id="why-is-the-confusion-matrix-useful" class="level1">
+<h1>Why is the Confusion Matrix useful</h1>
+<p>The confusion matrix breaks predictions into four categories, which can help data scientists understand the model performance better by knowing which kind of error the model tends to make. We can calculate a range of performance metrics by using the number of cases in the above four categories (TP, FP, TN, FN) to address different aspects of model evaluation.</p>
+<section id="accuracy" class="level2">
+<h2 class="anchored" data-anchor-id="accuracy">Accuracy</h2>
+<p>Accuracy is the most comment used performance metric. It is the proportion of correct predictions (both positive and negative) made by the model out of the total number of predictions.</p>
+<table class="table-striped table-hover caption-top table">
+<caption>Confusion Matrix for 100 emails</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>Predicted Spam</th>
+<th>Predicted Ham</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Actual Spam</td>
+<td>40</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>Actual Ham</td>
+<td>5</td>
+<td>45</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}}\)</span></p>
+<p><span class="math inline">\(\text{Accuracy} = \frac{40 + 45}{40 + 45 + 5 + 10} = \frac{85}{100} = 0.85\)</span></p>
+<p>The accuracy provides a simple and high-level view of model performance. The max value of accuracy is 1. Better model always has higher accuracy. However, accuracy could be a misleading metrix. Imagine you are training the email classification model with an imbalanced dataset that contains 99 ham emails and only 1 spam emails, even the dummy model can reach an accuracy of 99% becuase it predicting every observation as ham. Although the accuracy is high, the dummy model does not have the ability to detect spam email. But don’t worry, we have other metrcis to help working with imbalanced datasets.</p>
+</section>
+<section id="precision" class="level2">
+<h2 class="anchored" data-anchor-id="precision">Precision</h2>
+<p>Precision is</p>
+<p>While accuracy is often used as a quick measure of a model’s performance, it can be misleading, especially in cases of imbalanced datasets where one class is more prevalent than the other. For example, in medical diagnoses, predicting that every patient is healthy might lead to a high accuracy, but it would be a terrible model. This is where the confusion matrix provides more meaningful insights.</p>
+<p>Precision: The proportion of true positive predictions over all positive predictions (including false positives).</p>
+<p><span class="math inline">\(\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}\)</span></p>
+<p>Precision tells us how many of the predicted positive cases are actually positive.</p>
+<p>Recall (Sensitivity): The proportion of true positive predictions over all actual positive cases.</p>
+<p><span class="math inline">\(\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}\)</span></p>
+<p>Recall tells us how many of the actual positive cases we successfully identified. F1-Score: The harmonic mean of precision and recall, giving a balance between the two metrics.</p>
+<p><span class="math inline">\(F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}\)</span></p>
+<p>F1-Score is especially useful when dealing with imbalanced classes.</p>
+</section>
+</section>
+<section id="lets-work-on-an-example" class="level1">
+<h1>Let’s work on an example</h1>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

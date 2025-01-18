@@ -9,9 +9,23 @@
   {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
+    "title": "Explaining the Confusion Matrix for Beginners",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\nExplaining the Confusion Matrix for Beginners"
+    "text": "In the world of machine learning, classification is a wildly used supervised learning method, which recognize patterns and make predictions about which category a new piece of data belongs to. Classifiction models are used in a variety of scenarios, such as predicting if an email is spam, determining if a customer is likely to churn, or diagnosing a disease based on medical images. However, just because a model provides an answer doesn’t mean it’s the right one. The model can make mistakes when making predictions, and some mistakes are more harmful than others. For example, if the model is used to detect tumors from scans. If the model misclassified a malignant tumor as a benign one, the patient might not reciving proper treatment in time and cause some serious consequences. To truly evaluate a model’s performance, we need more than just its accuracy score. This is where the confusion matrix comes in.\nIn this blog post, we’ll explain the confusion matrix, how it works, how to interpret the key metrics derived from it, and how to apply it in Python to evaluate your own classification models."
+  },
+  {
+    "objectID": "posts/welcome/index.html#accuracy",
+    "href": "posts/welcome/index.html#accuracy",
+    "title": "Explaining the Confusion Matrix for Beginners",
+    "section": "Accuracy",
+    "text": "Accuracy\nAccuracy is the most comment used performance metric. It is the proportion of correct predictions (both positive and negative) made by the model out of the total number of predictions.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(\\text{Accuracy} = \\frac{\\text{TP} + \\text{TN}}{\\text{TP} + \\text{TN} + \\text{FP} + \\text{FN}}\\)\n\\(\\text{Accuracy} = \\frac{40 + 45}{40 + 45 + 5 + 10} = \\frac{85}{100} = 0.85\\)\nThe accuracy provides a simple and high-level view of model performance. The max value of accuracy is 1. Better model always has higher accuracy. However, accuracy could be a misleading metrix. Imagine you are training the email classification model with an imbalanced dataset that contains 99 ham emails and only 1 spam emails, even the dummy model can reach an accuracy of 99% becuase it predicting every observation as ham. Although the accuracy is high, the dummy model does not have the ability to detect spam email. But don’t worry, we have other metrcis to help working with imbalanced datasets."
+  },
+  {
+    "objectID": "posts/welcome/index.html#precision",
+    "href": "posts/welcome/index.html#precision",
+    "title": "Explaining the Confusion Matrix for Beginners",
+    "section": "Precision",
+    "text": "Precision\nPrecision is\nWhile accuracy is often used as a quick measure of a model’s performance, it can be misleading, especially in cases of imbalanced datasets where one class is more prevalent than the other. For example, in medical diagnoses, predicting that every patient is healthy might lead to a high accuracy, but it would be a terrible model. This is where the confusion matrix provides more meaningful insights.\nPrecision: The proportion of true positive predictions over all positive predictions (including false positives).\n\\(\\text{Precision} = \\frac{\\text{TP}}{\\text{TP} + \\text{FP}}\\)\nPrecision tells us how many of the predicted positive cases are actually positive.\nRecall (Sensitivity): The proportion of true positive predictions over all actual positive cases.\n\\(\\text{Recall} = \\frac{\\text{TP}}{\\text{TP} + \\text{FN}}\\)\nRecall tells us how many of the actual positive cases we successfully identified. F1-Score: The harmonic mean of precision and recall, giving a balance between the two metrics.\n\\(F1 = 2 \\cdot \\frac{\\text{Precision} \\cdot \\text{Recall}}{\\text{Precision} + \\text{Recall}}\\)\nF1-Score is especially useful when dealing with imbalanced classes."
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -25,6 +39,6 @@
     "href": "index.html",
     "title": "Blog",
     "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 17, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJan 14, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "Explaining the Confusion Matrix for Beginners\n\n\nExploring, analyzing, and visualizing the confusion matrix to measure model performance with practical examples\n\n\n\nExplanations\n\n\n\n\n\n\n\n\n\nJan 18, 2025\n\n\nYichi Zhang\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 17, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\nNo matching items"
   }
 ]
