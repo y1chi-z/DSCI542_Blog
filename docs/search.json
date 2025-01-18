@@ -18,14 +18,28 @@
     "href": "posts/welcome/index.html#accuracy",
     "title": "Explaining the Confusion Matrix for Beginners",
     "section": "Accuracy",
-    "text": "Accuracy\nAccuracy is the most comment used performance metric. It is the proportion of correct predictions (both positive and negative) made by the model out of the total number of predictions.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(\\text{Accuracy} = \\frac{\\text{TP} + \\text{TN}}{\\text{TP} + \\text{TN} + \\text{FP} + \\text{FN}}\\)\n\\(\\text{Accuracy} = \\frac{40 + 45}{40 + 45 + 5 + 10} = \\frac{85}{100} = 0.85\\)\nThe accuracy provides a simple and high-level view of model performance. The max value of accuracy is 1. Better model always has higher accuracy. However, accuracy could be a misleading metrix. Imagine you are training the email classification model with an imbalanced dataset that contains 99 ham emails and only 1 spam emails, even the dummy model can reach an accuracy of 99% becuase it predicting every observation as ham. Although the accuracy is high, the dummy model does not have the ability to detect spam email. But don’t worry, we have other metrcis to help working with imbalanced datasets."
+    "text": "Accuracy\nAccuracy is the most comment used performance metric. It is the proportion of correct predictions (both positive and negative) made by the model out of the total number of predictions.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(\\text{Accuracy} = \\frac{\\text{TP} + \\text{TN}}{\\text{TP} + \\text{TN} + \\text{FP} + \\text{FN}} = \\frac{40 + 45}{40 + 45 + 5 + 10} = \\frac{85}{100} = 0.85\\)\nThe accuracy provides a simple and high-level view of model performance. The max value of accuracy is 1. Better model always has higher accuracy. However, accuracy could be a misleading metrix. Imagine you are training the email classification model with an imbalanced dataset that contains 99 ham emails and only 1 spam emails, even the dummy model can reach an accuracy of 99% becuase it predicting every observation as ham. Although the accuracy is high, the dummy model does not have the ability to detect spam email. But don’t worry, we have other metrcis to help working with imbalanced datasets."
   },
   {
     "objectID": "posts/welcome/index.html#precision",
     "href": "posts/welcome/index.html#precision",
     "title": "Explaining the Confusion Matrix for Beginners",
     "section": "Precision",
-    "text": "Precision\nPrecision is\nWhile accuracy is often used as a quick measure of a model’s performance, it can be misleading, especially in cases of imbalanced datasets where one class is more prevalent than the other. For example, in medical diagnoses, predicting that every patient is healthy might lead to a high accuracy, but it would be a terrible model. This is where the confusion matrix provides more meaningful insights.\nPrecision: The proportion of true positive predictions over all positive predictions (including false positives).\n\\(\\text{Precision} = \\frac{\\text{TP}}{\\text{TP} + \\text{FP}}\\)\nPrecision tells us how many of the predicted positive cases are actually positive.\nRecall (Sensitivity): The proportion of true positive predictions over all actual positive cases.\n\\(\\text{Recall} = \\frac{\\text{TP}}{\\text{TP} + \\text{FN}}\\)\nRecall tells us how many of the actual positive cases we successfully identified. F1-Score: The harmonic mean of precision and recall, giving a balance between the two metrics.\n\\(F1 = 2 \\cdot \\frac{\\text{Precision} \\cdot \\text{Recall}}{\\text{Precision} + \\text{Recall}}\\)\nF1-Score is especially useful when dealing with imbalanced classes."
+    "text": "Precision\nPrecision is the proportion of true positive predictions over all positive predictions. It measures how many of the positive predictions made by a classification model are actually correct.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(\\text{Precision} = \\frac{\\text{TP}}{\\text{TP} + \\text{FP}} = \\frac{40}{40 + 5} = \\frac{40}{45} = 0.89\\)"
+  },
+  {
+    "objectID": "posts/welcome/index.html#recall",
+    "href": "posts/welcome/index.html#recall",
+    "title": "Explaining the Confusion Matrix for Beginners",
+    "section": "Recall",
+    "text": "Recall\nRecall is the proportion of true positive predictions over all actual positive cases. It measures how many of the actual positive cases are successfully identified.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(\\text{Recall} = \\frac{\\text{TP}}{\\text{TP} + \\text{FN}} = \\frac{40}{40 + 10} = \\frac{40}{50} = 0.8\\)"
+  },
+  {
+    "objectID": "posts/welcome/index.html#f1-score",
+    "href": "posts/welcome/index.html#f1-score",
+    "title": "Explaining the Confusion Matrix for Beginners",
+    "section": "F1-Score",
+    "text": "F1-Score\nF-score measures Precision and Recall at the same time and gives a balance between the two metrics.\n\nConfusion Matrix for 100 emails\n\n\n\nPredicted Spam\nPredicted Ham\n\n\n\n\nActual Spam\n40\n10\n\n\nActual Ham\n5\n45\n\n\n\n\\(F1 = 2 \\cdot \\frac{\\text{Precision} \\cdot \\text{Recall}}{\\text{Precision} + \\text{Recall}} =  2 \\cdot \\frac{0.89 \\cdot 0.8}{0.89 + 0.8} = 0.84\\)"
   },
   {
     "objectID": "posts/post-with-code/index.html",

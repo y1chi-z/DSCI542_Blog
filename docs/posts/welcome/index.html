@@ -225,22 +225,89 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p><span class="math inline">\(\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}}\)</span></p>
-<p><span class="math inline">\(\text{Accuracy} = \frac{40 + 45}{40 + 45 + 5 + 10} = \frac{85}{100} = 0.85\)</span></p>
+<p><span class="math inline">\(\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}} = \frac{40 + 45}{40 + 45 + 5 + 10} = \frac{85}{100} = 0.85\)</span></p>
 <p>The accuracy provides a simple and high-level view of model performance. The max value of accuracy is 1. Better model always has higher accuracy. However, accuracy could be a misleading metrix. Imagine you are training the email classification model with an imbalanced dataset that contains 99 ham emails and only 1 spam emails, even the dummy model can reach an accuracy of 99% becuase it predicting every observation as ham. Although the accuracy is high, the dummy model does not have the ability to detect spam email. But don’t worry, we have other metrcis to help working with imbalanced datasets.</p>
 </section>
 <section id="precision" class="level2">
 <h2 class="anchored" data-anchor-id="precision">Precision</h2>
-<p>Precision is</p>
-<p>While accuracy is often used as a quick measure of a model’s performance, it can be misleading, especially in cases of imbalanced datasets where one class is more prevalent than the other. For example, in medical diagnoses, predicting that every patient is healthy might lead to a high accuracy, but it would be a terrible model. This is where the confusion matrix provides more meaningful insights.</p>
-<p>Precision: The proportion of true positive predictions over all positive predictions (including false positives).</p>
-<p><span class="math inline">\(\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}\)</span></p>
-<p>Precision tells us how many of the predicted positive cases are actually positive.</p>
-<p>Recall (Sensitivity): The proportion of true positive predictions over all actual positive cases.</p>
-<p><span class="math inline">\(\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}\)</span></p>
-<p>Recall tells us how many of the actual positive cases we successfully identified. F1-Score: The harmonic mean of precision and recall, giving a balance between the two metrics.</p>
-<p><span class="math inline">\(F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}\)</span></p>
-<p>F1-Score is especially useful when dealing with imbalanced classes.</p>
+<p>Precision is the proportion of true positive predictions over all positive predictions. It measures how many of the positive predictions made by a classification model are actually correct.</p>
+<table class="table-striped table-hover caption-top table">
+<caption>Confusion Matrix for 100 emails</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>Predicted Spam</th>
+<th>Predicted Ham</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Actual Spam</td>
+<td>40</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>Actual Ham</td>
+<td>5</td>
+<td>45</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}} = \frac{40}{40 + 5} = \frac{40}{45} = 0.89\)</span></p>
+</section>
+<section id="recall" class="level2">
+<h2 class="anchored" data-anchor-id="recall">Recall</h2>
+<p>Recall is the proportion of true positive predictions over all actual positive cases. It measures how many of the actual positive cases are successfully identified.</p>
+<table class="table-striped table-hover caption-top table">
+<caption>Confusion Matrix for 100 emails</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>Predicted Spam</th>
+<th>Predicted Ham</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Actual Spam</td>
+<td>40</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>Actual Ham</td>
+<td>5</td>
+<td>45</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}} = \frac{40}{40 + 10} = \frac{40}{50} = 0.8\)</span></p>
+</section>
+<section id="f1-score" class="level2">
+<h2 class="anchored" data-anchor-id="f1-score">F1-Score</h2>
+<p>F-score measures Precision and Recall at the same time and gives a balance between the two metrics.</p>
+<table class="table-striped table-hover caption-top table">
+<caption>Confusion Matrix for 100 emails</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>Predicted Spam</th>
+<th>Predicted Ham</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Actual Spam</td>
+<td>40</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>Actual Ham</td>
+<td>5</td>
+<td>45</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} =  2 \cdot \frac{0.89 \cdot 0.8}{0.89 + 0.8} = 0.84\)</span></p>
 </section>
 </section>
 <section id="lets-work-on-an-example" class="level1">
