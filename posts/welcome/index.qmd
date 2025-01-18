@@ -57,7 +57,7 @@ Precision is the proportion of true positive predictions over all positive predi
 
 $\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}} = \frac{40}{40 + 5} = \frac{40}{45} = 0.89$
 
-Precision is important in scenarios where false positives are more costly or more harmful, such as the email classification model incorrectly classifies an important email as spam. The maximum value of precision is 1. Higher precision indicating fewer false positives. However, a high precision does not guarantee good model performance. In the email example, if the model predicts only one email as spam out of 100 spam emails and happens to be correct, the precision is 1 in this case, but the model fails to detect most spam emails. 
+Precision is important in scenarios where false positives are more costly, such as the email classification model incorrectly classifies an important email as spam. The maximum value of precision is 1. Higher precision indicating fewer false positives. However, a high precision does not guarantee good model performance. In the email example, if the model predicts only one email as spam out of 100 spam emails and happens to be correct, the precision is 1 in this case, but the model fails to detect most spam emails. 
 
 ## Recall
 Recall is the proportion of true positive predictions over all actual positive cases. It measures how many of the actual positive cases are successfully identified.
@@ -71,8 +71,13 @@ Recall is the proportion of true positive predictions over all actual positive c
 
 $\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}} = \frac{40}{40 + 10} = \frac{40}{50} = 0.8$
 
+Recall is important in scenarios where false negatives are more harmful. As we mentioned in the introduction, if the model misclassified a malignant tumor as a benign one (in the tumor detection, malignant tumor is usually the positive class), it  leads to a lack of treatment and reduces survival rates. The maximum value of recall is 1. A higher recall indicates fewer missed positives, but it does not necessarily indicates good model performance. In the email example, if the model predicts every email as spam, the recall will be 1 because no spam email is missing. The model would classify all ham emails incorrectly, and there would be nothing left in the inbox.
+
 ## F1-Score
-F-score measures Precision and Recall at the same time and gives a balance between the two metrics.
+You may notice from the previous sections that there's a trade off between precision and recall. That is correct! 
+- if the model has high precision and low recall, it indicates the model is predicting fewer positives to ensure they are correct This may miss some actual positives (high false negatives).
+- if the model has high recall and low precision, it implies the model is predicting many positives, catching most true positives, but also increases false positives.
+We want to have a performance metric that provides a more balanced view. F1-score measures precision and recall at the same time and provides a single value that represents the trade-off. A high F1-Score indicates the model has a good balance of precision and recall.
 
 |             | Predicted Spam | Predicted Ham |
 |-------------|----------------|---------------|
@@ -83,8 +88,7 @@ F-score measures Precision and Recall at the same time and gives a balance betwe
 
 $F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} =  2 \cdot \frac{0.89 \cdot 0.8}{0.89 + 0.8} = 0.84$
 
-	•	High Precision, Low Recall: The model is conservative, predicting fewer positives to ensure they are correct. This may miss some actual positives (high false negatives).
-	•	High Recall, Low Precision: The model predicts many positives, catching most true positives, but also increases false positives.
+
 
 
 
